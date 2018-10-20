@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TeleTime2._0
+namespace TeleTime
 {
     public class BundleConfig
     {
@@ -22,9 +22,9 @@ namespace TeleTime2._0
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
-
+            // Org theme: bootstrap.css
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.dark.css",
                       "~/Content/site.css"));
         }
     }

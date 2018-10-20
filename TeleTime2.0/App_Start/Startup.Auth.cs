@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using TeleTime2._0.Models;
+using TeleTime.Models;
 
-namespace TeleTime2._0
+namespace TeleTime
 {
     public partial class Startup
     {

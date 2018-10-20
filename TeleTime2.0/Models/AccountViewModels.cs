@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TeleTime2._0.Models
+namespace TeleTime.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

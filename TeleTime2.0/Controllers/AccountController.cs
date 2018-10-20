@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using TeleTime2._0.Models;
+using TeleTime.Models;
 
-namespace TeleTime2._0.Controllers
+namespace TeleTime.Controllers
 {
     [Authorize]
     public class AccountController : Controller

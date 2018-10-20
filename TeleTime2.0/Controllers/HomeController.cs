@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TeleTime2._0.Controllers
+namespace TeleTime.Controllers
 {
     public class HomeController : Controller
     {

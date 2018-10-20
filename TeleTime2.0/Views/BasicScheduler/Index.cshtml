@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Calendar";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DHXScheduler initialization sample</title>
+    <style>
+        body {
+            background-color: #2b3e50;
+        }
+    </style>
+</head>
+<body>
+    <div style="height:700px;width:900px;margin:0 auto">
+        @Html.Raw(Model.Render())
+    </div>
+</body>
+</html>

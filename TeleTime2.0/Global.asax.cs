@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace TeleTime2._0
+namespace TeleTime._0
 {
     public class MvcApplication : System.Web.HttpApplication
     {

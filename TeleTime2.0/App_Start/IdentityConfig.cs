@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using TeleTime2._0.Models;
+using TeleTime.Models;
 
-namespace TeleTime2._0
+namespace TeleTime
 {
     public class EmailService : IIdentityMessageService
     {

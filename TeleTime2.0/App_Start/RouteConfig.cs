@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace TeleTime2._0
+namespace TeleTime
 {
     public class RouteConfig
     {

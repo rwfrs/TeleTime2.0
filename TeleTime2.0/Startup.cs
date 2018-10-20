@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(TeleTime2._0.Startup))]
-namespace TeleTime2._0
+[assembly: OwinStartupAttribute(typeof(TeleTime.Startup))]
+namespace TeleTime
 {
     public partial class Startup
     {

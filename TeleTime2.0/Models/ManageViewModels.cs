@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace TeleTime2._0.Models
+namespace TeleTime.Models
 {
     public class IndexViewModel
     {
