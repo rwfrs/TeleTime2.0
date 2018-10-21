@@ -22,7 +22,6 @@ namespace TeleTime.DAL
         public virtual DbSet<TypeOfShift> TypeOfShifts { get; set; }
         public virtual DbSet<WorkShift> WorkShifts { get; set; }
         public virtual DbSet<WorkShiftName> WorkShiftNames { get; set; }
-        public virtual DbSet<WorkDay> WorkDays { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -18,7 +18,7 @@ namespace TeleTime2._0.Controllers
         // GET: WorkShift
         public ActionResult Index()
         {
-            var workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Times).Include(w => w.TypeOfShift).Include(w => w.WorkDay).Include(w => w.WorkShiftName);
+            var workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Times).Include(w => w.TypeOfShift).Include(w => w.WorkShiftName);
             return View(workShifts.ToList());
         }
 
@@ -43,7 +43,6 @@ namespace TeleTime2._0.Controllers
             ViewBag.Name = new SelectList(db.Persons, "Name", "EMail");
             ViewBag.StartEndTime = new SelectList(db.Times, "StartEndTime", "StartEndTime");
             ViewBag.ShiftName = new SelectList(db.TypeOfShifts, "ShiftName", "ShiftName");
-            ViewBag.DateID = new SelectList(db.WorkDays, "DateID", "DateID");
             ViewBag.WorkShiftNameName = new SelectList(db.WorkShiftNames, "WorkShiftNameName", "WorkShiftNameName");
             return View();
         }
@@ -53,8 +52,19 @@ namespace TeleTime2._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WorkShiftID,WorkShiftNameName,Name,StartEndTime,ShiftName,DateID")] WorkShift workShift)
+        public ActionResult Create([Bind(Include = "WorkShiftID,WorkShiftNameName,Name,StartEndTime,ShiftName,Date")] WorkShift workShift)
         {
+            var kalender = new SchedulerContext();
+
+            Event newEvent = new Event();
+
+            newEvent.start_date = workShift.Date;
+            newEvent.end_date = workShift.Date.AddHours(23);
+            newEvent.text = workShift.ShiftName;
+
+            kalender.Events.Add(newEvent);
+            kalender.SaveChanges();
+
             if (ModelState.IsValid)
             {
                 db.WorkShifts.Add(workShift);
@@ -65,7 +75,6 @@ namespace TeleTime2._0.Controllers
             ViewBag.Name = new SelectList(db.Persons, "Name", "EMail", workShift.Name);
             ViewBag.StartEndTime = new SelectList(db.Times, "StartEndTime", "StartEndTime", workShift.StartEndTime);
             ViewBag.ShiftName = new SelectList(db.TypeOfShifts, "ShiftName", "ShiftName", workShift.ShiftName);
-            ViewBag.DateID = new SelectList(db.WorkDays, "DateID", "DateID", workShift.DateID);
             ViewBag.WorkShiftNameName = new SelectList(db.WorkShiftNames, "WorkShiftNameName", "WorkShiftNameName", workShift.WorkShiftNameName);
             return View(workShift);
         }
@@ -85,7 +94,6 @@ namespace TeleTime2._0.Controllers
             ViewBag.Name = new SelectList(db.Persons, "Name", "EMail", workShift.Name);
             ViewBag.StartEndTime = new SelectList(db.Times, "StartEndTime", "StartEndTime", workShift.StartEndTime);
             ViewBag.ShiftName = new SelectList(db.TypeOfShifts, "ShiftName", "ShiftName", workShift.ShiftName);
-            ViewBag.DateID = new SelectList(db.WorkDays, "DateID", "DateID", workShift.DateID);
             ViewBag.WorkShiftNameName = new SelectList(db.WorkShiftNames, "WorkShiftNameName", "WorkShiftNameName", workShift.WorkShiftNameName);
             return View(workShift);
         }
@@ -95,7 +103,7 @@ namespace TeleTime2._0.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WorkShiftID,WorkShiftNameName,Name,StartEndTime,ShiftName,DateID")] WorkShift workShift)
+        public ActionResult Edit([Bind(Include = "WorkShiftID,WorkShiftNameName,Name,StartEndTime,ShiftName,Date")] WorkShift workShift)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +114,6 @@ namespace TeleTime2._0.Controllers
             ViewBag.Name = new SelectList(db.Persons, "Name", "EMail", workShift.Name);
             ViewBag.StartEndTime = new SelectList(db.Times, "StartEndTime", "StartEndTime", workShift.StartEndTime);
             ViewBag.ShiftName = new SelectList(db.TypeOfShifts, "ShiftName", "ShiftName", workShift.ShiftName);
-            ViewBag.DateID = new SelectList(db.WorkDays, "DateID", "DateID", workShift.DateID);
             ViewBag.WorkShiftNameName = new SelectList(db.WorkShiftNames, "WorkShiftNameName", "WorkShiftNameName", workShift.WorkShiftNameName);
             return View(workShift);
         }

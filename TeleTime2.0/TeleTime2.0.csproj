@@ -189,7 +189,6 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="Models\TypeOfShift.cs" />
-    <Compile Include="Models\WorkDay.cs" />
     <Compile Include="Models\WorkShift.cs" />
     <Compile Include="Models\WorkShiftName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
