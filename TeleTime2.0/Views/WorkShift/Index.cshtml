@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TeleTime.Models.WorkShift>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.EMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Times.StartEndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfShift.ShiftName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkDay.DateID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkShiftName.WorkShiftNameName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.EMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Times.StartEndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfShift.ShiftName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkDay.DateID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkShiftName.WorkShiftNameName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkShiftID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkShiftID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkShiftID })
+        </td>
+    </tr>
+}
+
+</table>

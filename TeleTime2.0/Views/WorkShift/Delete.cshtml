@@ -1,0 +1,64 @@
+﻿@model TeleTime.Models.WorkShift
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>WorkShift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.EMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.EMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Times.StartEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Times.StartEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfShift.ShiftName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfShift.ShiftName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkDay.DateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkDay.DateID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkShiftName.WorkShiftNameName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkShiftName.WorkShiftNameName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

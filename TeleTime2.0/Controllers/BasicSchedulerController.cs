@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TeleTime.Context;
+// using TeleTime.Context;
+using TeleTime.DAL;
 using TeleTime.Models;
 
 namespace TeleTime.Controllers

@@ -14,6 +14,8 @@ namespace TeleTime.Models
             public string text { get; set; }
             public DateTime start_date { get; set; }
             public DateTime end_date { get; set; }
+
+            // TODO - Connect Event to WorkDay?
         }
 
 }

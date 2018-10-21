@@ -1,0 +1,58 @@
+﻿@model TeleTime.Models.WorkShift
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkShift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Person.EMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person.EMail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Times.StartEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Times.StartEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfShift.ShiftName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfShift.ShiftName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkDay.DateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkDay.DateID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkShiftName.WorkShiftNameName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkShiftName.WorkShiftNameName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkShiftID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
