@@ -1,5 +1,6 @@
 ﻿using DHTMLX.Common;
 using DHTMLX.Scheduler;
+using DHTMLX.Scheduler.Controls;
 using DHTMLX.Scheduler.Data;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,12 @@ namespace TeleTime.Controllers
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
             sched.InitialDate = new DateTime(2018, 10, 15);
+            sched.Config.isReadonly = true;
+
+            //var week = sched.Views[1];
+            //week.Scale.Ignore();
+            //sched.Views.Add(week);
+
             return View(sched);
         }
 
