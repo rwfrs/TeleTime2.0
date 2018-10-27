@@ -17,11 +17,10 @@ namespace TeleTime.DAL
         }
 
         public virtual DbSet<Event> Events { get; set; }
-        public virtual DbSet<Person> Persons { get; set; }
-        public virtual DbSet<Time> Times { get; set; }
-        public virtual DbSet<TypeOfShift> TypeOfShifts { get; set; }
+        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Day> Days { get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<WorkShift> WorkShifts { get; set; }
-        public virtual DbSet<WorkShiftName> WorkShiftNames { get; set; }
         public virtual DbSet<WorkDay> WorkDays { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

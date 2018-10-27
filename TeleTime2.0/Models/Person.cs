@@ -9,11 +9,9 @@ namespace TeleTime.Models
 {
     public class Person
     {
-        //Primary key
-        [Key]
+        public int ID { get; set; }
         public string Name { get; set; }
-        public string EMail { get; set; }
 
-        public List<WorkShift> WorkShifts { get; set; }
+        public List<WorkShift> WorkShift { get; set; }
     }
 }

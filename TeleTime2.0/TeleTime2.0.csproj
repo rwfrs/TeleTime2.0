@@ -13,7 +13,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TeleTime2._0</RootNamespace>
+    <RootNamespace>TeleTime</RootNamespace>
     <AssemblyName>TeleTime2.0</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -174,8 +174,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BasicSchedulerController.cs" />
+    <Compile Include="Controllers\DayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
+    <Compile Include="Controllers\WorkDayController.cs" />
     <Compile Include="Controllers\WorkShiftController.cs" />
     <Compile Include="DAL\SchedulerContext.cs" />
     <Compile Include="DAL\TeleTimeInitializer.cs" />
@@ -183,15 +187,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Time.cs" />
-    <Compile Include="Models\TypeOfShift.cs" />
+    <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\WorkDay.cs" />
     <Compile Include="Models\WorkShift.cs" />
-    <Compile Include="Models\WorkShiftName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -464,11 +467,32 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\BasicScheduler\Index.cshtml" />
+    <Content Include="Views\WorkDay\Create.cshtml" />
+    <Content Include="Views\WorkDay\Delete.cshtml" />
+    <Content Include="Views\WorkDay\Details.cshtml" />
+    <Content Include="Views\WorkDay\Edit.cshtml" />
+    <Content Include="Views\WorkDay\Index.cshtml" />
     <Content Include="Views\WorkShift\Create.cshtml" />
     <Content Include="Views\WorkShift\Delete.cshtml" />
     <Content Include="Views\WorkShift\Details.cshtml" />
     <Content Include="Views\WorkShift\Edit.cshtml" />
     <Content Include="Views\WorkShift\Index.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\Person\Delete.cshtml" />
+    <Content Include="Views\Person\Details.cshtml" />
+    <Content Include="Views\Person\Edit.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\Shift\Create.cshtml" />
+    <Content Include="Views\Shift\Delete.cshtml" />
+    <Content Include="Views\Shift\Details.cshtml" />
+    <Content Include="Views\Shift\Edit.cshtml" />
+    <Content Include="Views\Shift\Index.cshtml" />
+    <Content Include="Views\Day\Create.cshtml" />
+    <Content Include="Views\Day\Delete.cshtml" />
+    <Content Include="Views\Day\Details.cshtml" />
+    <Content Include="Views\Day\Edit.cshtml" />
+    <Content Include="Views\Day\Index.cshtml" />
+    <Content Include="Views\WorkShift\ShowShift.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

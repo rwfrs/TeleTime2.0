@@ -8,22 +8,12 @@ namespace TeleTime.Models
 {
     public class WorkShift
     {
-        [Key]
-        public int WorkShiftID { get; set; } 
+        public int ID { get; set; }
 
-        public string WorkShiftNameName { get; set; }
-        public WorkShiftName WorkShiftName { get; set; }
+        public int ShiftID { get; set; }
+        public Shift Shift { get; set; }
 
-        public string Name { get; set; }
+        public int PersonID { get; set; }
         public Person Person { get; set; }
-
-        public string StartEndTime { get; set; }
-        public Time Times { get; set; }
-
-        public string ShiftName { get; set; }
-        public TypeOfShift TypeOfShift { get; set; }
-
-        public int? DateID { get; set; }
-        public WorkDay WorkDay { get; set; }
     }
 }

@@ -11,48 +11,24 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Person.EMail)
+            @Html.DisplayNameFor(model => model.Person.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Person.EMail)
+            @Html.DisplayFor(model => model.Person.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Times.StartEndTime)
+            @Html.DisplayNameFor(model => model.Shift.ShiftName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Times.StartEndTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TypeOfShift.ShiftName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TypeOfShift.ShiftName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkDay.DateID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkDay.DateID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkShiftName.WorkShiftNameName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkShiftName.WorkShiftNameName)
+            @Html.DisplayFor(model => model.Shift.ShiftName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkShiftID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
