@@ -19,11 +19,27 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Role.RoleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.RoleName)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Shift.ShiftName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Shift.ShiftName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time.StartTime)
         </dd>
 
     </dl>

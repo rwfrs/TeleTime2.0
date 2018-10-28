@@ -18,10 +18,9 @@ namespace TeleTime.Controllers
         // GET: WorkShift
         public ActionResult Index()
         {
-            var workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Shift);
+            var workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time);
             return View(workShifts.ToList());
         }
-
 
         // Create this one to show just one shift
 
@@ -32,7 +31,7 @@ namespace TeleTime.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<WorkShift> workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Shift).Where(x => x.Shift.ID == id).ToList();
+            List<WorkShift> workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.Shift.ID == id).ToList();
             if (workShifts == null)
             {
                 return HttpNotFound();
@@ -59,7 +58,9 @@ namespace TeleTime.Controllers
         public ActionResult Create()
         {
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name");
+            ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName");
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
+            ViewBag.TimeID = new SelectList(db.Times, "ID", "WorkTime");
             return View();
         }
 
@@ -68,7 +69,7 @@ namespace TeleTime.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ShiftID,PersonID")] WorkShift workShift)
+        public ActionResult Create([Bind(Include = "ID,ShiftID,PersonID,TimeID,RoleID")] WorkShift workShift)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +79,9 @@ namespace TeleTime.Controllers
             }
 
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name", workShift.PersonID);
+            ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName", workShift.RoleID);
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workShift.ShiftID);
+            ViewBag.TimeID = new SelectList(db.Times, "ID", "StartTime", workShift.TimeID);
             return View(workShift);
         }
 
@@ -95,7 +98,9 @@ namespace TeleTime.Controllers
                 return HttpNotFound();
             }
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name", workShift.PersonID);
+            ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName", workShift.RoleID);
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workShift.ShiftID);
+            ViewBag.TimeID = new SelectList(db.Times, "ID", "StartTime", workShift.TimeID);
             return View(workShift);
         }
 
@@ -104,7 +109,7 @@ namespace TeleTime.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ShiftID,PersonID")] WorkShift workShift)
+        public ActionResult Edit([Bind(Include = "ID,ShiftID,PersonID,TimeID,RoleID")] WorkShift workShift)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +118,9 @@ namespace TeleTime.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name", workShift.PersonID);
+            ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName", workShift.RoleID);
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workShift.ShiftID);
+            ViewBag.TimeID = new SelectList(db.Times, "ID", "StartTime", workShift.TimeID);
             return View(workShift);
         }
 

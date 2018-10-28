@@ -27,6 +27,10 @@ namespace TeleTime.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<TeleTime.Models.Role> Roles { get; set; }
+
+        public System.Data.Entity.DbSet<TeleTime.Models.Time> Times { get; set; }
     }
    
 }

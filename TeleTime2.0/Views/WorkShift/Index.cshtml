@@ -15,7 +15,13 @@
             @Html.DisplayNameFor(model => model.Person.Name)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Role.RoleName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Shift.ShiftName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time.WorkTime)
         </th>
         <th></th>
     </tr>
@@ -26,7 +32,13 @@
             @Html.DisplayFor(modelItem => item.Person.Name)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Role.RoleName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Shift.ShiftName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time.WorkTime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

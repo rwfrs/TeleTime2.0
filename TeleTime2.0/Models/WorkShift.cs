@@ -15,5 +15,11 @@ namespace TeleTime.Models
 
         public int PersonID { get; set; }
         public Person Person { get; set; }
+
+        public int TimeID { get; set; }
+        public Time Time { get; set; }
+
+        public int RoleID { get; set; }
+        public Role Role { get; set; }
     }
 }

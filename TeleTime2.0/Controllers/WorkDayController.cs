@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -43,6 +44,42 @@ namespace TeleTime.Controllers
             ViewBag.DayID = new SelectList(db.Days, "ID", "Date");
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
             return View();
+        }
+
+        // GET: WorkDay/CreateDate/
+        public ActionResult CreateDate(string date)
+        {
+            DateTime dateTime = DateTime.ParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture);
+
+            //Day day = db.Days.Where(x => x.Date == dateTime).First();
+
+            //ViewBag.Day = day;
+
+            // http://localhost:65386/WorkDay/CreateDate/?date=20181001
+
+            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "Date");
+
+            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
+            return View();
+        }
+
+        // POST: WorkDay/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateDate([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
+        {
+            if (ModelState.IsValid)
+            {
+                db.WorkDays.Add(workDay);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);
+            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
+            return View(workDay);
         }
 
         // POST: WorkDay/Create

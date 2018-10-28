@@ -21,6 +21,7 @@ namespace TeleTime.Controllers
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
             sched.InitialDate = new DateTime(2018, 10, 5);
+            sched.Config.isReadonly = true;
             return View(sched);
         }
 

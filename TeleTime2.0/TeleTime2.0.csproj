@@ -178,7 +178,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Controllers\WorkDayController.cs" />
     <Compile Include="Controllers\WorkShiftController.cs" />
     <Compile Include="DAL\SchedulerContext.cs" />
@@ -192,7 +194,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Shift.cs" />
+    <Compile Include="Models\Time.cs" />
     <Compile Include="Models\WorkDay.cs" />
     <Compile Include="Models\WorkShift.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,6 +212,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.js" />
@@ -472,11 +477,6 @@
     <Content Include="Views\WorkDay\Details.cshtml" />
     <Content Include="Views\WorkDay\Edit.cshtml" />
     <Content Include="Views\WorkDay\Index.cshtml" />
-    <Content Include="Views\WorkShift\Create.cshtml" />
-    <Content Include="Views\WorkShift\Delete.cshtml" />
-    <Content Include="Views\WorkShift\Details.cshtml" />
-    <Content Include="Views\WorkShift\Edit.cshtml" />
-    <Content Include="Views\WorkShift\Index.cshtml" />
     <Content Include="Views\Person\Create.cshtml" />
     <Content Include="Views\Person\Delete.cshtml" />
     <Content Include="Views\Person\Details.cshtml" />
@@ -492,7 +492,23 @@
     <Content Include="Views\Day\Details.cshtml" />
     <Content Include="Views\Day\Edit.cshtml" />
     <Content Include="Views\Day\Index.cshtml" />
+    <Content Include="Views\WorkShift\Create.cshtml" />
+    <Content Include="Views\WorkShift\Delete.cshtml" />
+    <Content Include="Views\WorkShift\Details.cshtml" />
+    <Content Include="Views\WorkShift\Edit.cshtml" />
+    <Content Include="Views\WorkShift\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Time\Create.cshtml" />
+    <Content Include="Views\Time\Delete.cshtml" />
+    <Content Include="Views\Time\Details.cshtml" />
+    <Content Include="Views\Time\Edit.cshtml" />
+    <Content Include="Views\Time\Index.cshtml" />
     <Content Include="Views\WorkShift\ShowShift.cshtml" />
+    <Content Include="Views\WorkDay\CreateDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
