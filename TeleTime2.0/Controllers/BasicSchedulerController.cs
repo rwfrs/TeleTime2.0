@@ -20,7 +20,7 @@ namespace TeleTime.Controllers
             sched.Skin = DHXScheduler.Skins.Terrace;
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
-            sched.InitialDate = new DateTime(2018, 10, 5);
+            sched.InitialDate = DateTime.Today;
             sched.Config.isReadonly = true;
             return View(sched);
         }

@@ -22,11 +22,18 @@ namespace TeleTime.Controllers
             return View(workShifts.ToList());
         }
 
+        // TODO - SHOWSHIFT after create -> nothing in shiftname
+
         // Create this one to show just one shift
 
-        // GET: WorkShift/ShowShift/5
-        public ActionResult ShowShift(int? id)
+        // GET: WorkShift/ShowShift/5 or shiftName
+        public ActionResult ShowShift(int? id, string shiftName = "null")
         {
+            if (shiftName != "null")
+            {
+                List<WorkShift> workShiftsName = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.Shift.ShiftName == shiftName).ToList();
+                return View(workShiftsName);
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -54,12 +61,12 @@ namespace TeleTime.Controllers
             return View(workShift);
         }
 
-        // GET: WorkShift/Create
-        public ActionResult Create()
+        // GET: WorkShift/Create/5 - ShiftID
+        public ActionResult Create(int? id)
         {
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name");
             ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName");
-            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
+            ViewBag.ShiftID = new SelectList(db.Shifts.Where(x => x.ID == id), "ID", "ShiftName");
             ViewBag.TimeID = new SelectList(db.Times, "ID", "WorkTime");
             return View();
         }
@@ -75,7 +82,7 @@ namespace TeleTime.Controllers
             {
                 db.WorkShifts.Add(workShift);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowShift", "WorkShift", new { id = workShift.ShiftID });
             }
 
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name", workShift.PersonID);

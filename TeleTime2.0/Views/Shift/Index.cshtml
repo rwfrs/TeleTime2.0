@@ -23,9 +23,10 @@
             @Html.DisplayFor(modelItem => item.ShiftName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("EditName", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("DetailsAboutShift", "DetailsAboutShift", new { id = item.ID }) |
+            @Html.ActionLink("EditWorkShift", "ShowShift", "WorkShift", new { id = item.ID }, null) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }

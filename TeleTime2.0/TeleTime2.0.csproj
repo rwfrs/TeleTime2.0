@@ -509,6 +509,9 @@
     <Content Include="Views\Time\Index.cshtml" />
     <Content Include="Views\WorkShift\ShowShift.cshtml" />
     <Content Include="Views\WorkDay\CreateDate.cshtml" />
+    <Content Include="Views\Shift\DetailsAboutShift.cshtml" />
+    <Content Include="Views\Person\ShowPersonWorkShifts.cshtml" />
+    <Content Include="Views\Person\ShowPersonWorkDays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

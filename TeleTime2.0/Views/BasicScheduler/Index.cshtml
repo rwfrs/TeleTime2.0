@@ -25,48 +25,73 @@
     </div>
 
     <script>
-        var days = document.getElementsByClassName('dhx_scale_holder');
-        var dates = document.querySelectorAll('aria-label');
 
-        // days.addEventListener('click', clickedDay, false);
-        for (var i = 0; i < days.length; i++) {
-            days[i].addEventListener('dblclick', function () {
-                //console.log(this.outerHTML);
-                var newText = this.outerHTML.match(/\d{1}\s[a-zA-Z]{3}\s\d{4}/);
+        // TODO - IF SHIFT EXIST - dhx_body 
+        // TODO - IF IT'S TODAY - dhx_scale_holder_now
+        // TODO - all months! AND FIX BUG! Creats 6 days!!
 
-                var date = newText[0];
-                var day = date[0];
-                if (day.length == 1) {
-                    day = '0' + day;
+        window.addEventListener('DOMSubtreeModified', function () {
+            
+                var days = document.getElementsByClassName('dhx_scale_holder');
+                var shiftDays = document.getElementsByClassName('dhx_body');
+
+                for (var i = 0; i < shiftDays.length; i++) {
+                    shiftDays[i].addEventListener('click', function () {
+                        var shiftText = this.innerHTML;
+                        if (shiftText != '') {
+                            console.log(shiftText);
+                            window.location.href = 'http://localhost:65386/WorkShift/ShowShift/?shiftName=' + shiftText;
+                        }
+                    }, false);
                 }
-                if (date.match(/Oct/)) {
-                    var month = 10;
+
+                for (var i = 0; i < days.length; i++) {
+                    days[i].addEventListener('dblclick', function () {
+                        var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
+
+                        var date = newText[0];
+                        var day = date.match(/\d{1,2}/);
+                        console.log(day[0]);
+                        if (day[0].length == 1) {
+                            day = '0' + day;
+                        }
+
+                        
+                        console.log(day);
+                        if (date.match(/Oct/)) {
+                            var month = 10;
+                        }
+                        if (date.match(/Nov/)) {
+                            var month = 11;
+                        }
+                        var year = date.match(/\d{4}/);
+
+                        var clickedDate = year + "-" + month + "-" + day;
+                        var redirectDate = year + month + day;
+
+                        console.log(redirectDate);
+                        doPost(clickedDate, redirectDate);
+                    }, false);
                 }
-                var year = date.match(/\d{4}/);
 
-                var clickedDate = year + "-" + month + "-" + day;
-                var redirectDate = year + month + day;
+                var d = new Date(2018, 11, 30);
 
-                console.log(redirectDate);
-                doPost(clickedDate, redirectDate);
-            }, false);
-        }
+                function doPost(clickedDate, redirectDate) {
 
-        var d = new Date(2018, 11, 30);
+                    var form = $('#__AjaxAntiForgeryForm');
+                    var token = $('input[name="__RequestVerificationToken"]', form).val();
+                    $.post("/Day/Create",
+                        {
+                            __RequestVerificationToken: token,
+                            Date: clickedDate
+                        });
 
-        function doPost(clickedDate, redirectDate) {
-            var form = $('#__AjaxAntiForgeryForm');
-            var token = $('input[name="__RequestVerificationToken"]', form).val();
-            $.post("/Day/Create",
-                {
+                    window.location.href = 'http://localhost:65386/WorkDay/CreateDate/?date=' + redirectDate;
                     
-                    __RequestVerificationToken: token,
-                    Date: clickedDate
-                    
-                });
-
-            window.location.href = 'http://localhost:65386/WorkDay/CreateDate/?date=' + redirectDate;
-        }
+                }
+            
+        }, false);    
+       
     </script>
 </body>
 </html>

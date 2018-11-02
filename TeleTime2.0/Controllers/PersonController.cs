@@ -36,6 +36,49 @@ namespace TeleTime.Controllers
             return View(person);
         }
 
+        // GET: Person/Details/5
+        public ActionResult ShowPersonWorkShifts(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<WorkShift> workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.Person.ID == id).ToList();
+            if (workShifts == null)
+            {
+                return HttpNotFound();
+            }
+            return View(workShifts);
+        }
+
+        // GET: Person/Details/5
+        public ActionResult ShowPersonWorkDays(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<WorkShift> workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.PersonID == id).ToList();
+            List<WorkDay> workDays = db.WorkDays.Include(w => w.Day).Include(w => w.Shifts).ToList();
+            List<WorkDay> personWorkDays = new List<WorkDay>();
+            foreach (var day in workDays)
+            {
+                foreach (var shift in workShifts)
+                {
+                    if (day.ShiftID == shift.ShiftID)
+                    {
+                        personWorkDays.Add(day);
+                    }
+                }
+            }
+            
+            if (personWorkDays == null)
+            {
+                return HttpNotFound();
+            }
+            return View(personWorkDays);
+        }
+
         // GET: Person/Create
         public ActionResult Create()
         {

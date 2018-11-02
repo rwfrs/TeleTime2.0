@@ -36,6 +36,22 @@ namespace TeleTime.Controllers
             return View(shift);
         }
 
+        // GET: Shift/DetailsAboutShift/5
+        public ActionResult DetailsAboutShift(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var workDays = db.WorkDays.Include(w => w.Day).Include(w => w.Shifts).Where(x => x.ShiftID == id);
+            
+            if (workDays == null)
+            {
+                return HttpNotFound();
+            }
+            return View(workDays);
+        }
+
         // GET: Shift/Create
         public ActionResult Create()
         {
@@ -53,7 +69,7 @@ namespace TeleTime.Controllers
             {
                 db.Shifts.Add(shift);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "WorkShift", new { id = shift.ID });
             }
 
             return View(shift);

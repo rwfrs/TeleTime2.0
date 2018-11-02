@@ -58,11 +58,11 @@ namespace TeleTime
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "546986359840-7mupau836bgbncehquq22hpgp79de046.apps.googleusercontent.com",
+                ClientSecret = "RFh7VQhQP8wOxZ2qAvGohRB_"
+            });
         }
     }
 }
