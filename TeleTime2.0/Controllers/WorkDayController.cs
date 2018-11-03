@@ -70,11 +70,30 @@ namespace TeleTime.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateDate([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
         {
+            //TODO - Do I have to include a DB-reference here? Include Day and ShiftName?
+
+            var workDayDate = db.Days.Where(x => x.ID == workDay.DayID).First();
+
+            var workDayShift = db.Shifts.Where(x => x.ID == workDay.ShiftID).First();
+
+            var kalender = new SchedulerContext();
+
+            Event newEvent = new Event();
+
+            newEvent.start_date = workDayDate.Date;
+            newEvent.end_date = workDayDate.Date.AddHours(23);
+            newEvent.text = workDayShift.ShiftName;
+
+            kalender.Events.Add(newEvent);
+            kalender.SaveChanges();
+
             if (ModelState.IsValid)
             {
+                var redirectID = workDay.ShiftID;
                 db.WorkDays.Add(workDay);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
+                // return RedirectToAction("Index");
             }
 
             ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);
@@ -91,9 +110,11 @@ namespace TeleTime.Controllers
         {
             if (ModelState.IsValid)
             {
+                var redirectID = workDay.ShiftID;
                 db.WorkDays.Add(workDay);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
+                // return RedirectToAction("Index");
             }
 
             ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);

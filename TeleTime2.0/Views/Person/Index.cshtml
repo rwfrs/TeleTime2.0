@@ -23,8 +23,9 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Edit Person Details", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Show Persons Workshifts", "ShowPersonWorkShifts", new { id=item.ID }) |
+            @Html.ActionLink("Show All WorkDays", "ShowPersonWorkDays", new { id=item.ID}) |  
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>

@@ -49,11 +49,20 @@ namespace TeleTime.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Date")] Day day)
         {
+            var dates = db.Days.Select(x => x.Date);
+            if (dates.Contains(day.Date))
+            {
+                return View(day);
+            }
+
             if (ModelState.IsValid)
             {
-                db.Days.Add(day);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.Days.Any(x => x.Date == day.Date))
+                {
+                    db.Days.Add(day);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(day);
