@@ -24,7 +24,7 @@ namespace TeleTime
                       "~/Scripts/respond.js"));
             // Org theme: bootstrap.css
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.dark.css",
+                      "~/Content/bootstrap.tt2.css",
                       "~/Content/site.css"));
         }
     }

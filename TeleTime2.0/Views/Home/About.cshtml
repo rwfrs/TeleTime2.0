@@ -1,7 +1,78 @@
 ﻿@{
-    ViewBag.Title = "About";
+   // ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@ViewBag.Title</h2>
+@*<h3>@ViewBag.Message</h3>*@
 
-<p>Use this area to provide additional information.</p>
+    <h3><b>Användar roller</b></h3>
+
+<p>
+    När Applikationen körs första gången så skapas olika roller i databasen,
+    dessa har olika nivåer av auktorisering som styrs i "backenden"<br /> och påverkar
+    vad som syns i "frontenden". Det skapas även en deafult Admin och Developer när
+    man startar som sparas i databasen.
+</p>
+
+<h4> - Admin</h4>
+<p>För att få tillgång till TeleTimes funktioner så måste du vara registrerad som Admin.<br />
+   Du kommer då få en mer avancerad menu och vara authoriserad till att skapa pass, personer m.m i databasen.</p>
+
+<h4> - Developer</h4>
+<p> 
+    En roll för att underlätta när man utvecklar applikationen, alla views som är kopplade till controllers visas<br />
+    För att enklare kuna testa saker.
+</p>
+
+<h4> - Vanlig användare</h4>
+<p>
+    Innan man registrerat sig och som vanlig användare får man bara tillgång till startsida,funktioner,kontakt.<br />
+    Man har även tillgång till registrera sig och login sidan.
+    
+</p>
+
+    <h3><b>Funktioner</b></h3>
+
+<h4> - Pass (Shift)</h4>
+
+
+<h4> - Kalender (Calender)</h4>
+
+<h4> - Arbetspass (WorkShift)</h4>
+
+<h4> - Personer (People)</h4>
+
+<h4> - Tid (Time)</h4>
+
+<h4> - Arbetsdag (WorkDay)</h4>
+
+<h4> - Arbetspass (WorkShift)</h4>
+
+    <h3><b>API - Kalenderfunktionen</b></h3>
+<p>
+    Vi använder oss av DHTMLX Scheduler.NET gratisversion, för att få en trevligare frontend och
+    på ett användarvänligt sätt kunna visa kopplingar och schemaläggningsfunktioner.<br />
+    Vi använder bara deras kalender och har byggt på med egen kod med Ajax anrop för att
+    skapa funktionalitet som vi vill ha.
+</p>
+
+<p>
+    Hur man använder kalendern:<br />
+    Vi har gjort så man kan "dubbeklicka" på en dag på kalender i veckovyn.<br />
+    Då kan man koppla ett pass till denna dag som sedan visas i kalendern.
+</p>
+
+
+    <h3><b>Hur man använder applikationen</b></h3>
+<p>
+    Schemaläggaren bygger på pass, för att skapa ett pass så får man först börja med att skapa allt
+    ett pass innehåller.
+</p>
+
+<p>
+    Skapa Personer - Som du sedan kopplar till passet.<br />
+    Skapa Roller - Vilka roller innehåller passet.<br />
+    Skapa Tider - Vilken starttid och sluttid ska passet ha.<br />
+</p>
+
+
+

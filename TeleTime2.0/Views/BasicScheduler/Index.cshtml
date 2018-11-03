@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Calendar";
+//ViewBag.Title = "Calendar";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
 <!DOCTYPE html>
@@ -10,12 +10,12 @@
     <title>DHXScheduler initialization sample</title>
     <style>
         body {
-            background-color: #2b3e50;
+       /*    background-color: #2b3e50;*/
         }
     </style>
 </head>
 <body>
-    <div style="height:700px;width:900px;margin:0 auto">
+    <div style="height:700px;width:900px;margin:0 auto;box-shadow: 0 0 7px 0px black">
         @Html.Raw(Model.Render())
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm"}))
         {
