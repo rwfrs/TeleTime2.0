@@ -41,7 +41,7 @@ namespace TeleTime.Controllers
         // GET: WorkDay/Create
         public ActionResult Create()
         {
-            ViewBag.DayID = new SelectList(db.Days, "ID", "Date");
+            ViewBag.DayID = new SelectList(db.Days, "ID", "DateText");
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
             return View();
         }
@@ -57,9 +57,11 @@ namespace TeleTime.Controllers
 
             // http://localhost:65386/WorkDay/CreateDate/?date=20181001
 
-            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "Date");
+            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "DateText");
 
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
+
+            ViewBag.NumberOfShifts = db.Shifts.Count();
             return View();
         }
 
@@ -97,7 +99,7 @@ namespace TeleTime.Controllers
                 // return RedirectToAction("Index");
             }
 
-            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workionDay.ShiftID);
+            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
             return View(workDay);
         }
 

@@ -7,14 +7,30 @@ using TeleTime.Models;
 
 namespace TeleTime.DAL
 {
-    public class TeleTimeInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchedulerContext>
+    public class TeleTimeInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchedulerContext>
     // public class TeleTimeInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchedulerContext>
     {
         protected override void Seed(SchedulerContext context)
         {
             //        // Creating dummy data to test out the database
 
-            //        // TODO - Should we try to create events that are ready here..
+            // Create all days for 2018
+
+            // DAY - All for 2018
+
+            var days = new List<Day>();
+
+            var daysInYear = 365;
+
+            DateTime date = new DateTime(2018, 01, 01);
+
+            for (int i = 0; i < daysInYear; i++)
+            {
+                days.Add(new Day { Date = date.AddDays(i) });
+            }
+
+            days.ForEach(s => context.Days.Add(s));
+            context.SaveChanges();
 
             //        // TIME
             //        var times = new List<Time>

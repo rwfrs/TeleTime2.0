@@ -23,7 +23,7 @@
             @Html.DisplayFor(modelItem => item.ShiftName)
         </td>
         <td>
-            @Html.ActionLink("EditName", "Edit", new { id = item.ID }) |
+            @*@Html.ActionLink("EditName", "Edit", new { id = item.ID }) |*@ <!-- TODO - Known bug with this one. -->
             @Html.ActionLink("DetailsAboutShift", "DetailsAboutShift", new { id = item.ID }) |
             @Html.ActionLink("EditWorkShift", "ShowShift", "WorkShift", new { id = item.ID }, null) |
             @Html.ActionLink("Delete", "Delete", new { id = item.ID })
