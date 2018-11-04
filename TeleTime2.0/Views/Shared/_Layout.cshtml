@@ -25,7 +25,11 @@
                     <li>@Html.ActionLink("Funktioner", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
 
-                   
+                    @if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Kalender", "Index", "BasicScheduler")</li>
+                    }
+
                    @if (User.IsInRole("Admin"))
                    { 
                     
