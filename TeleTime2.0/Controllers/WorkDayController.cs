@@ -92,11 +92,15 @@ namespace TeleTime.Controllers
 
             if (ModelState.IsValid)
             {
+                if (workDay.Shifts == null)
+                {
+                    return RedirectToAction("Index", "Shift");
+                }
                 var redirectID = workDay.ShiftID;
-                db.WorkDays.Add(workDay);
-                db.SaveChanges();
-                return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
-                // return RedirectToAction("Index");
+                    db.WorkDays.Add(workDay);
+                    db.SaveChanges();
+                    return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
+                    // return RedirectToAction("Index");
             }
 
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
@@ -112,11 +116,15 @@ namespace TeleTime.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (workDay.Shifts == null)
+                {
+                 return RedirectToAction("Index", "Shift");
+                }
                 var redirectID = workDay.ShiftID;
                 db.WorkDays.Add(workDay);
                 db.SaveChanges();
                 return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
-                // return RedirectToAction("Index");
+                    // return RedirectToAction("Index");        
             }
 
             ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);

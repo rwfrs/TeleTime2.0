@@ -24,7 +24,7 @@ namespace TeleTime.Controllers
             sched.Config.isReadonly = true;
             return View(sched);
         }
-
+       
         public ContentResult Data()
         {
             return (new SchedulerAjaxData(
