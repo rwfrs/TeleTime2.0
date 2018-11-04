@@ -8,5 +8,5 @@ Registrerar man en user så får man bara tillgång till Kalendern.
 
 Deafultadmin men tillgång till alla admin funktioner:
 
-Login: "admin@gadmin.com"
+Login: "admin@admin.com"
 Password: "AdminAdmin1234!"
