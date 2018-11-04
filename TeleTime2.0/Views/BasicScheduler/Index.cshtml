@@ -4,6 +4,9 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
+<h3><b>Kalender</b></h3>
+<p>"Dubbelklicka" på en dag i veckovyn.</p>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +18,7 @@
     </style>
 </head>
 <body>
-    <div style="height:700px;width:900px;margin:0 auto;box-shadow: 0 0 7px 0px black">
+    <div style="height:700px;width:900px;box-shadow: 0 0 7px 0px black">
         @Html.Raw(Model.Render())
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm"}))
         {

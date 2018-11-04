@@ -25,16 +25,17 @@
                     <li>@Html.ActionLink("Funktioner", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
 
+                   
                    @if (User.IsInRole("Admin"))
                    { 
                     
-                        <li>@Html.ActionLink("Calendar", "Index", "BasicScheduler")</li>
-                        <li>@Html.ActionLink("WorkDay", "Index", "WorkDay")</li>
+                        <li>@Html.ActionLink("Kalender", "Index", "BasicScheduler")</li>
+                        <li>@Html.ActionLink("Arbetsdag", "Index", "WorkDay")</li>
                       //<li>@Html.ActionLink("WorkShift", "Index", "WorkShift")</li>
-                        <li>@Html.ActionLink("Day", "Index", "Day")</li>
-                        <li>@Html.ActionLink("Shift", "Index", "Shift")</li>
-                        <li>@Html.ActionLink("Time", "Index", "Time")</li>
-                        <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                        <li>@Html.ActionLink("Dag", "Index", "Day")</li>
+                        <li>@Html.ActionLink("Pass", "Index", "Shift")</li>
+                        <li>@Html.ActionLink("Tid", "Index", "Time")</li>
+                        <li>@Html.ActionLink("Roll", "Index", "Role")</li>
                         <li>@Html.ActionLink("Person", "Index", "Person")</li>
                    }
 
