@@ -71,6 +71,7 @@ namespace TeleTime.Controllers
         public ActionResult CreateDate([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
         {
             //TODO - Do I have to include a DB-reference here? Include Day and ShiftName?
+            //TODO - if there are no shifts -> crash when you press create fix http://localhost:65386/WorkDay/CreateDate/?date=20181105
 
             var workDayDate = db.Days.Where(x => x.ID == workDay.DayID).First();
 
@@ -96,8 +97,7 @@ namespace TeleTime.Controllers
                 // return RedirectToAction("Index");
             }
 
-            ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);
-            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
+            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workionDay.ShiftID);
             return View(workDay);
         }
 

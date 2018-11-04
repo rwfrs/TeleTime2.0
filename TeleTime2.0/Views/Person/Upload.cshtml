@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload Persons with Excel</h2>
+
+@using (Html.BeginForm("Upload2", "Person", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="input-group">
+        <label for="exampleInputFile">Choose file with Persons</label>
+        <input type="file" name="UploadedFile" id="exampleInputFile">
+        <p class="help-block">Bugg att man inte ser texten på filen</p>
+    </div>
+    <button type="submit" name="Submit" class="btn btn-default" value="Submit">Submit</button>
+
+}
+
+

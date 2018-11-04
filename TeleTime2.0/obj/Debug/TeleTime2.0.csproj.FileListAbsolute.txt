@@ -213,3 +213,5 @@ C:\Users\Wellaflex15\Source\Repos\TeleTime2.0\TeleTime2.0\obj\Debug\TeleTime2.0.
 C:\Users\Wellaflex15\Source\Repos\TeleTime2.0\TeleTime2.0\obj\Debug\TeleTime2.0.dll
 C:\Users\Wellaflex15\Source\Repos\TeleTime2.0\TeleTime2.0\obj\Debug\TeleTime2.0.pdb
 C:\Users\Wellaflex15\Source\Repos\TeleTime2.0\TeleTime2.0\obj\Debug\TeleTime2.0.csprojAssemblyReference.cache
+C:\Users\Wellaflex15\Source\Repos\TeleTime2.0\TeleTime2.0\bin\EPPlus.dll
+C:\Users\Wellaflex15\Source\Repos\TeleTime2.0\TeleTime2.0\bin\EPPlus.xml
