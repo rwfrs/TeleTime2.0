@@ -26,16 +26,38 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="CreateDate" class="btn btn-default" />
+        @if (ViewBag.NumberOfShifts > 0)
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="CreateDate" class="btn btn-default" />
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="CreateDate" class="btn btn-default" disabled />
+                </div>
+            </div>
+        }
     </div>
 }
 
+@if (ViewBag.NumberOfShifts == 0)
+{
+    <h3>Du har inte skapat några pass än. Gå till PASS och skapa några. :)</h3>
+    <div>
+        @Html.ActionLink("Skapa Pass genom att klicka här", "Index", "Shift")
+    </div>
+}
+
+<br />
+<br />
+
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tillbaka till Arbetsdag", "Index")
 </div>
 
 @section Scripts {

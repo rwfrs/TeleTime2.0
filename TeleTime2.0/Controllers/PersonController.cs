@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeleTime.DAL;
 using TeleTime.Models;
+using OfficeOpenXml;
 
 namespace TeleTime.Controllers
 {
@@ -77,6 +78,51 @@ namespace TeleTime.Controllers
                 return HttpNotFound();
             }
             return View(personWorkDays);
+        }
+
+        //GET: Person/Upload
+        public ActionResult Upload()
+        {
+            return View("Upload");
+        }
+
+
+        // POST: Person/Upload
+        public ActionResult Upload2(FormCollection formCollection)
+        {
+            if (Request != null)
+            {
+                HttpPostedFileBase file = Request.Files["UploadedFile"];
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+                {
+                    string fileName = file.FileName;
+                    string fileContentType = file.ContentType;
+                    byte[] fileBytes = new byte[file.ContentLength];
+                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+                    var usersList = new List<Person>();
+                    using (var package = new ExcelPackage(file.InputStream))
+                    {
+                        var currentSheet = package.Workbook.Worksheets;
+                        var workSheet = currentSheet.First();
+                        var noOfCol = workSheet.Dimension.End.Column;
+                        var noOfRow = workSheet.Dimension.End.Row;
+
+                        for (int rowIterator = 1; rowIterator <= noOfRow; rowIterator++)
+                        {
+                            var user = new Person();
+                            user.Name = workSheet.Cells[rowIterator, 1].Value.ToString();
+                            usersList.Add(user);
+                        }
+                    }
+                    foreach (var item in usersList)
+                    {
+                        db.People.Add(item);
+                    }
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         // GET: Person/Create

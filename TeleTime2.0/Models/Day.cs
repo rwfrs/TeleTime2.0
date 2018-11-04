@@ -12,7 +12,10 @@ namespace TeleTime.Models
         public int ID { get; set; }
         [DisplayName("Datum")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime Date { get; set; }
+
+        public string DateText { get { return Date.ToShortDateString(); } }
 
         public List<WorkDay> WorkDay { get; set; }
     }

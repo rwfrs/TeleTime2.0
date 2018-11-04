@@ -41,7 +41,7 @@ namespace TeleTime.Controllers
         // GET: WorkDay/Create
         public ActionResult Create()
         {
-            ViewBag.DayID = new SelectList(db.Days, "ID", "Date");
+            ViewBag.DayID = new SelectList(db.Days, "ID", "DateText");
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
             return View();
         }
@@ -57,9 +57,11 @@ namespace TeleTime.Controllers
 
             // http://localhost:65386/WorkDay/CreateDate/?date=20181001
 
-            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "Date");
+            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "DateText");
 
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
+
+            ViewBag.NumberOfShifts = db.Shifts.Count();
             return View();
         }
 
@@ -71,6 +73,7 @@ namespace TeleTime.Controllers
         public ActionResult CreateDate([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
         {
             //TODO - Do I have to include a DB-reference here? Include Day and ShiftName?
+            //TODO - if there are no shifts -> crash when you press create fix http://localhost:65386/WorkDay/CreateDate/?date=20181105
 
             var workDayDate = db.Days.Where(x => x.ID == workDay.DayID).First();
 
@@ -100,7 +103,6 @@ namespace TeleTime.Controllers
                     // return RedirectToAction("Index");
             }
 
-            ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
             return View(workDay);
         }

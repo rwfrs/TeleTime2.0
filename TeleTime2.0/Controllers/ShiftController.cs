@@ -97,6 +97,8 @@ namespace TeleTime.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ShiftName")] Shift shift)
         {
+            var shiftName = shift.ShiftName;
+            
             if (ModelState.IsValid)
             {
                 db.Entry(shift).State = EntityState.Modified;
@@ -127,6 +129,11 @@ namespace TeleTime.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Shift shift = db.Shifts.Find(id);
+            
+            //Searches all events with the same name and removes them as well
+            List<Event> events = db.Events.Where(x => x.text == shift.ShiftName).ToList();
+            events.ForEach(s => db.Events.Remove(s));
+
             db.Shifts.Remove(shift);
             db.SaveChanges();
             return RedirectToAction("Index");
