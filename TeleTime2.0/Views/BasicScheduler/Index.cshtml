@@ -29,70 +29,105 @@
 
     <script>
 
-        // TODO - IF SHIFT EXIST - dhx_body 
-        // TODO - IF IT'S TODAY - dhx_scale_holder_now
-        // TODO - all months! AND FIX BUG! Creats 6 days!!
-
         window.addEventListener('DOMSubtreeModified', function () {
             
-                var days = document.getElementsByClassName('dhx_scale_holder');
-                var shiftDays = document.getElementsByClassName('dhx_body');
-
-                for (var i = 0; i < shiftDays.length; i++) {
-                    shiftDays[i].addEventListener('click', function () {
-                        var shiftText = this.innerHTML;
-                        if (shiftText != '') {
-                            console.log(shiftText);
-                            window.location.href = 'http://localhost:65386/WorkShift/ShowShift/?shiftName=' + shiftText;
-                        }
-                    }, false);
-                }
-
-                for (var i = 0; i < days.length; i++) {
-                    days[i].addEventListener('dblclick', function () {
-                        var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
-
-                        var date = newText[0];
-                        var day = date.match(/\d{1,2}/);
-                        console.log(day[0]);
-                        if (day[0].length == 1) {
-                            day = '0' + day;
-                        }
-
-                        
-                        console.log(day);
-                        if (date.match(/Oct/)) {
-                            var month = 10;
-                        }
-                        if (date.match(/Nov/)) {
-                            var month = 11;
-                        }
-                        var year = date.match(/\d{4}/);
-
-                        var clickedDate = year + "-" + month + "-" + day;
-                        var redirectDate = year + month + day;
-
-                        console.log(redirectDate);
-                        doPost(clickedDate, redirectDate);
-                    }, false);
-                }
-
-                var d = new Date(2018, 11, 30);
-
-                function doPost(clickedDate, redirectDate) {
-
-                    var form = $('#__AjaxAntiForgeryForm');
-                    var token = $('input[name="__RequestVerificationToken"]', form).val();
-                    $.post("/Day/Create",
-                        {
-                            __RequestVerificationToken: token,
-                            Date: clickedDate
-                        });
-
-                    window.location.href = 'http://localhost:65386/WorkDay/CreateDate/?date=' + redirectDate;
-                    
-                }
+            var days = document.getElementsByClassName('dhx_scale_holder');
+            var shiftDays = document.getElementsByClassName('dhx_body');
             
+            var monthDays = document.getElementsByTagName('td');
+            var monthShiftDays = document.getElementsByClassName('dhx_cal_event_clear');
+
+            // TODO - continue here... Month days with shifts
+            for (var i = 0; i < monthShiftDays.length; i++) {
+                monthShiftDays[i].addEventListener('click', function () {
+                    console.log(this.innerText);
+                }, false);
+            }
+
+            for (var i = 0; i < monthDays.length; i++) {
+                monthDays[i].addEventListener('dblclick', function () {
+                    var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
+                    console.log(newText);
+
+                    var date = newText[0];
+                    var day = date.match(/\d{1,2}/);
+                    console.log(day[0]);
+                    if (day[0].length == 1) {
+                        day = '0' + day;
+                    }
+
+                    console.log(day);
+                    if (date.match(/Oct/)) {
+                        var month = 10;
+                    }
+                    if (date.match(/Nov/)) {
+                        var month = 11;
+                    }
+                    var year = date.match(/\d{4}/);
+
+                    var clickedDate = year + "-" + month + "-" + day;
+                    var redirectDate = year + month + day;
+
+                    console.log(redirectDate);
+                    doPost(clickedDate, redirectDate);
+                }, false);
+            }
+
+            for (var i = 0; i < shiftDays.length; i++) {
+                shiftDays[i].addEventListener('click', function () {
+                    var shiftText = this.innerHTML;
+                    if (shiftText != '') {
+                        console.log(shiftText);
+                        window.location.href = 'http://localhost:65386/WorkShift/ShowShift/?shiftName=' + shiftText;
+                    }
+                }, false);
+            }
+
+            for (var i = 0; i < days.length; i++) {
+                days[i].addEventListener('dblclick', function () {
+                    var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
+
+                    var date = newText[0];
+                    var day = date.match(/\d{1,2}/);
+                    console.log(day[0]);
+                    if (day[0].length == 1) {
+                        day = '0' + day;
+                    }
+
+
+                    console.log(day);
+                    if (date.match(/Oct/)) {
+                        var month = 10;
+                    }
+                    if (date.match(/Nov/)) {
+                        var month = 11;
+                    }
+                    var year = date.match(/\d{4}/);
+
+                    var clickedDate = year + "-" + month + "-" + day;
+                    var redirectDate = year + month + day;
+
+                    console.log(redirectDate);
+                    doPost(clickedDate, redirectDate);
+                }, false);
+            }
+
+            var d = new Date(2018, 11, 30);
+
+            function doPost(clickedDate, redirectDate) {
+
+                var form = $('#__AjaxAntiForgeryForm');
+                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                $.post("/Day/Create",
+                    {
+                        __RequestVerificationToken: token,
+                        Date: clickedDate
+                    });
+
+                window.location.href = 'http://localhost:65386/WorkDay/CreateDate/?date=' + redirectDate;
+
+            }
+
         }, false);    
        
     </script>
