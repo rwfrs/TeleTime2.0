@@ -39,6 +39,7 @@ Funktioner
 - Tid (Time)
 - Arbetsdag (WorkDay)
 - Arbetspass (WorkShift)
+
 API - Kalenderfunktionen
 Vi använder oss av DHTMLX Scheduler.NET gratisversion, för att få en trevligare frontend och på ett användarvänligt sätt kunna visa kopplingar och schemaläggningsfunktioner.
 Vi använder bara deras kalender och har byggt på med egen kod med Ajax anrop för att skapa funktionalitet som vi vill ha.
