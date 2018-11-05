@@ -38,29 +38,13 @@ namespace TeleTime.Controllers
             return View(workDay);
         }
 
+        // Method that gives you all the days
         // GET: WorkDay/Create
         public ActionResult Create()
         {
             ViewBag.DayID = new SelectList(db.Days, "ID", "DateText");
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
-            return View();
-        }
-
-        // GET: WorkDay/CreateDate/
-        public ActionResult CreateDate(string date)
-        {
-            DateTime dateTime = DateTime.ParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture);
-
-            //Day day = db.Days.Where(x => x.Date == dateTime).First();
-
-            //ViewBag.Day = day;
-
-            // http://localhost:65386/WorkDay/CreateDate/?date=20181001
-
-            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "DateText");
-
-            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
-
+            // Helps whit logic in the view to tell us if there are any shifts or not registered
             ViewBag.NumberOfShifts = db.Shifts.Count();
             return View();
         }
@@ -70,15 +54,13 @@ namespace TeleTime.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDate([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
+        public ActionResult Create([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
         {
-            //TODO - Do I have to include a DB-reference here? Include Day and ShiftName?
-            //TODO - if there are no shifts -> crash when you press create fix http://localhost:65386/WorkDay/CreateDate/?date=20181105
-
             var workDayDate = db.Days.Where(x => x.ID == workDay.DayID).First();
 
             var workDayShift = db.Shifts.Where(x => x.ID == workDay.ShiftID).First();
 
+            // Here comes code for connecting the date with workday. You come from the calendar and if you register a workday, then a event is created in the calendar.
             var kalender = new SchedulerContext();
 
             Event newEvent = new Event();
@@ -92,42 +74,64 @@ namespace TeleTime.Controllers
 
             if (ModelState.IsValid)
             {
-                if (workDay.Shifts == null)
-                {
-                    return RedirectToAction("Index", "Shift");
-                }
-                var redirectID = workDay.ShiftID;
-                    db.WorkDays.Add(workDay);
-                    db.SaveChanges();
-                    return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
-                    // return RedirectToAction("Index");
-            }
-
-            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
-            return View(workDay);
-        }
-
-        // POST: WorkDay/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
-        {
-            if (ModelState.IsValid)
-            {
-                if (workDay.Shifts == null)
-                {
-                 return RedirectToAction("Index", "Shift");
-                }
+                
                 var redirectID = workDay.ShiftID;
                 db.WorkDays.Add(workDay);
                 db.SaveChanges();
                 return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
-                    // return RedirectToAction("Index");        
             }
 
             ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);
+            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
+            return View(workDay);
+        }
+
+        // Method that gives you the selected date.
+        // GET: WorkDay/CreateDate/
+        public ActionResult CreateDate(string date)
+        {
+            DateTime dateTime = DateTime.ParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture);
+
+            ViewBag.DayID = new SelectList(db.Days.Where(x => x.Date == dateTime), "ID", "DateText");
+
+            ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName");
+
+            // Helps whit logic in the view to tell us if there are any shifts or not registered
+            ViewBag.NumberOfShifts = db.Shifts.Count();
+            return View();
+        }
+
+        // POST: WorkDay/CreateDate/
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateDate([Bind(Include = "ID,DayID,ShiftID")] WorkDay workDay)
+        {
+            var workDayDate = db.Days.Where(x => x.ID == workDay.DayID).First();
+
+            var workDayShift = db.Shifts.Where(x => x.ID == workDay.ShiftID).First();
+
+            // Here comes code for connecting the date with workday. You come from the calendar and if you register a workday, then a event is created in the calendar.
+            var kalender = new SchedulerContext();
+
+            Event newEvent = new Event();
+
+            newEvent.start_date = workDayDate.Date;
+            newEvent.end_date = workDayDate.Date.AddHours(23);
+            newEvent.text = workDayShift.ShiftName;
+
+            kalender.Events.Add(newEvent);
+            kalender.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                var redirectID = workDay.ShiftID;
+                db.WorkDays.Add(workDay);
+                db.SaveChanges();
+                return RedirectToAction("ShowShift", "WorkShift", new { id = redirectID });
+            }
+
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
             return View(workDay);
         }

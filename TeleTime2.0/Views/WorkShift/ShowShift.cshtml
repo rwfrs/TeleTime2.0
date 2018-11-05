@@ -4,9 +4,9 @@
     ViewBag.Title = "ShowShift";
 }
 
-@{int shiftId = 0;}
+@{int shiftId = ViewBag.ID;}
 
-<h2>ShowShift</h2>
+<h2>Passöversikt</h2>
 
 <table class="table">
     <tr>
@@ -41,9 +41,8 @@
                 @Html.DisplayFor(modelItem => item.Time.StartTime)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Ändra", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Ta bort", "Delete", new { id = item.ID })
             </td>
         </tr>
 
@@ -52,9 +51,13 @@
 
     <p>
         @Html.ActionLink(
-            linkText: "Create New",
+            linkText: "Lägg till ett shift",
             actionName: "Create",
             routeValues: new {id = shiftId})
     </p>
 
 </table>
+
+<div>
+    @Html.ActionLink("Tillbaka till kalendern", "Index", "BasicScheduler")
+</div>

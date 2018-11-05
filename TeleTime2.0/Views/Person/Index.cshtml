@@ -4,31 +4,43 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3>Person</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if ((User.IsInRole("Admin")) || (User.IsInRole("Developer")))
+{
+    <p>
+        @Html.ActionLink("Skapa ny person", "Create")
+    </p>
+    <p>
+        @Html.ActionLink("Ladda upp personer med excel", "Upload")
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Namn:
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit Person Details", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Show Persons Workshifts", "ShowPersonWorkShifts", new { id=item.ID }) |
-            @Html.ActionLink("Show All WorkDays", "ShowPersonWorkDays", new { id=item.ID}) |  
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            @if ((User.IsInRole("Admin")) || (User.IsInRole("Developer")))
+            {
+                <td>
+                    @Html.ActionLink("Ändra namn på person", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Ta bort person", "Delete", new { id = item.ID })
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Visa persons alla pass", "ShowPersonWorkShifts", new { id = item.ID }) |
+                @Html.ActionLink("Visa persons alla arbetsdagar", "ShowPersonWorkDays", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -7,33 +7,19 @@ namespace TeleTime.Models
 {
     public class Time
     {
+        // Primary key
         public int ID { get; set; }
+        // Start och the WorkShift
         public string StartTime { get; set; }
+        // End of the WorkShift
         public string EndTime { get; set; }
-
+        // Property that returns a whole WorkTime
         public string WorkTime
         {
             get { return $"{StartTime} - {EndTime}"; }
         }
 
+        // Connection to WorkShift
         public List<WorkShift> WorkShift { get; set; }
-
-        // Create this one to show just one shift
-
-        //// GET: WorkShift/ShowShift/5
-        //public ActionResult ShowShift(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    List<WorkShift> workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Shift).Where(x => x.Shift.ID == id).ToList();
-        //    if (workShifts == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(workShifts);
-        //}
-
     }
 }

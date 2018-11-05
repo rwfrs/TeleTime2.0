@@ -22,16 +22,15 @@ namespace TeleTime.Controllers
             return View(workShifts.ToList());
         }
 
-        // TODO - SHOWSHIFT after create -> nothing in shiftname
-
-        // Create this one to show just one shift
-
+        // Method that shows a specific shift and its workshifts depending if a shiftname is passed in or shiftID.
         // GET: WorkShift/ShowShift/5 or shiftName
         public ActionResult ShowShift(int? id, string shiftName = "null")
         {
+            
             if (shiftName != "null")
             {
                 List<WorkShift> workShiftsName = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.Shift.ShiftName == shiftName).ToList();
+                ViewBag.ID = workShiftsName.Select(x => x.ShiftID).First();
                 return View(workShiftsName);
             }
             if (id == null)
@@ -43,6 +42,7 @@ namespace TeleTime.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ID = id;
             return View(workShifts);
         }
 
@@ -82,6 +82,7 @@ namespace TeleTime.Controllers
             {
                 db.WorkShifts.Add(workShift);
                 db.SaveChanges();
+                // Redirects to ShowShift with the specified ID. That way you only see the shift you are creating.
                 return RedirectToAction("ShowShift", "WorkShift", new { id = workShift.ShiftID });
             }
 

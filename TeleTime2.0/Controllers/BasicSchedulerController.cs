@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-// using TeleTime.Context;
 using TeleTime.DAL;
 using TeleTime.Models;
 
 namespace TeleTime.Controllers
 {
+    // Controller class for the external calendar we are using in the project: more information can be found at: https://dhtmlx.com/
     public class BasicSchedulerController : Controller
     {
         public ActionResult Index()

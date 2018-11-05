@@ -28,14 +28,46 @@
     </div>
 
     <script>
-
+        // JavaScript for creating interaction with the user interface. 
         window.addEventListener('DOMSubtreeModified', function () {
-            
+
+            var dayNow = document.getElementsByClassName('dhx_scale_holder_now');
+
+            console.log(dayNow);
             var days = document.getElementsByClassName('dhx_scale_holder');
             var shiftDays = document.getElementsByClassName('dhx_body');
             
             var monthDays = document.getElementsByTagName('td');
             var monthShiftDays = document.getElementsByClassName('dhx_cal_event_clear');
+
+            if (dayNow.length > 0) {
+                dayNow[0].addEventListener('dblclick', function () {
+                    var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
+                    console.log(newText);
+
+                    var date = newText[0];
+                    var day = date.match(/\d{1,2}/);
+                    console.log(day[0]);
+                    if (day[0].length == 1) {
+                        day = '0' + day;
+                    }
+
+                    console.log(day);
+                    if (date.match(/Oct/)) {
+                        var month = 10;
+                    }
+                    if (date.match(/Nov/)) {
+                        var month = 11;
+                    }
+                    var year = date.match(/\d{4}/);
+
+                    var clickedDate = year + "-" + month + "-" + day;
+                    var redirectDate = year + month + day;
+
+                    console.log(redirectDate);
+                    doPost(clickedDate, redirectDate);
+                }, false);
+            }
 
             // TODO - continue here... Month days with shifts
             for (var i = 0; i < monthShiftDays.length; i++) {
@@ -94,7 +126,6 @@
                         day = '0' + day;
                     }
 
-
                     console.log(day);
                     if (date.match(/Oct/)) {
                         var month = 10;
@@ -109,10 +140,8 @@
 
                     console.log(redirectDate);
                     doPost(clickedDate, redirectDate);
-                }, false);
+                    }, false);
             }
-
-            var d = new Date(2018, 11, 30);
 
             function doPost(clickedDate, redirectDate) {
 

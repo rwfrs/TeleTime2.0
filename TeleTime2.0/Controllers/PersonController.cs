@@ -37,7 +37,8 @@ namespace TeleTime.Controllers
             return View(person);
         }
 
-        // GET: Person/Details/5
+        // Method that shows which workshifts a person is included in. 
+        // GET: Person/ShowPersonWorkShifts/5
         public ActionResult ShowPersonWorkShifts(int? id)
         {
             if (id == null)
@@ -51,14 +52,16 @@ namespace TeleTime.Controllers
             }
             return View(workShifts);
         }
-
-        // GET: Person/Details/5
+        
+        // Method that shows all days which a person are going to work.
+        // GET: Person/ShowPersonWorkDays/5
         public ActionResult ShowPersonWorkDays(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // Combining workshift context and workday context to list which ones a person are connected to.
             List<WorkShift> workShifts = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.PersonID == id).ToList();
             List<WorkDay> workDays = db.WorkDays.Include(w => w.Day).Include(w => w.Shifts).ToList();
             List<WorkDay> personWorkDays = new List<WorkDay>();
@@ -80,14 +83,15 @@ namespace TeleTime.Controllers
             return View(personWorkDays);
         }
 
+        // Method for showing the upload page for people.
         //GET: Person/Upload
         public ActionResult Upload()
         {
             return View("Upload");
         }
 
-
-        // POST: Person/Upload
+        // Method that reads the uploaded excel and stores it in the data base.
+        // POST: Person/Upload2
         public ActionResult Upload2(FormCollection formCollection)
         {
             if (Request != null)
@@ -99,7 +103,7 @@ namespace TeleTime.Controllers
                     string fileContentType = file.ContentType;
                     byte[] fileBytes = new byte[file.ContentLength];
                     var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-                    var usersList = new List<Person>();
+                    var personList = new List<Person>();
                     using (var package = new ExcelPackage(file.InputStream))
                     {
                         var currentSheet = package.Workbook.Worksheets;
@@ -107,16 +111,17 @@ namespace TeleTime.Controllers
                         var noOfCol = workSheet.Dimension.End.Column;
                         var noOfRow = workSheet.Dimension.End.Row;
 
+                        // rowIterator tells which row to start at
                         for (int rowIterator = 1; rowIterator <= noOfRow; rowIterator++)
                         {
-                            var user = new Person();
-                            user.Name = workSheet.Cells[rowIterator, 1].Value.ToString();
-                            usersList.Add(user);
+                            var person = new Person();
+                            person.Name = workSheet.Cells[rowIterator, 1].Value.ToString();
+                            personList.Add(person);
                         }
                     }
-                    foreach (var item in usersList)
+                    foreach (var p in personList)
                     {
-                        db.People.Add(item);
+                        db.People.Add(p);
                     }
                     db.SaveChanges();
                 }

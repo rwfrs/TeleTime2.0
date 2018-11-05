@@ -58,6 +58,7 @@ namespace TeleTime
             //   appId: "",
             //   appSecret: "");
 
+            // TODO Added this to allow for Oauth authentication, but we need an authenticated website -> we don't have that yet.
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "546986359840-7mupau836bgbncehquq22hpgp79de046.apps.googleusercontent.com",

@@ -28,23 +28,22 @@
                     @if (User.IsInRole("User"))
                     {
                         <li>@Html.ActionLink("Kalender", "Index", "BasicScheduler")</li>
+                        <li>@Html.ActionLink("Person", "Index", "Person")</li>
                     }
 
-                   @if (User.IsInRole("Admin"))
-                   { 
-                    
+                    @if (User.IsInRole("Admin"))
+                    {
+
                         <li>@Html.ActionLink("Kalender", "Index", "BasicScheduler")</li>
                         <li>@Html.ActionLink("Arbetsdag", "Index", "WorkDay")</li>
-                      //<li>@Html.ActionLink("WorkShift", "Index", "WorkShift")</li>
-                        <li>@Html.ActionLink("Dag", "Index", "Day")</li>
                         <li>@Html.ActionLink("Pass", "Index", "Shift")</li>
                         <li>@Html.ActionLink("Tid", "Index", "Time")</li>
                         <li>@Html.ActionLink("Roll", "Index", "Role")</li>
                         <li>@Html.ActionLink("Person", "Index", "Person")</li>
-                   }
+                    }
 
-                   @if (User.IsInRole("Developer"))
-                   {
+                    @if (User.IsInRole("Developer"))
+                    {
                         <li>@Html.ActionLink("Calendar", "Index", "BasicScheduler")</li>
                         <li>@Html.ActionLink("WorkDay", "Index", "WorkDay")</li>
                         <li>@Html.ActionLink("WorkShift", "Index", "WorkShift")</li>
@@ -53,7 +52,7 @@
                         <li>@Html.ActionLink("Time", "Index", "Time")</li>
                         <li>@Html.ActionLink("Role", "Index", "Role")</li>
                         <li>@Html.ActionLink("Person", "Index", "Person")</li>
-                   }
+                    }
 
                 </ul>
                 @Html.Partial("_LoginPartial")

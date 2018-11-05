@@ -11,6 +11,7 @@ namespace TeleTime.DAL
 
     public partial class SchedulerContext : DbContext
     {
+        // All the data base connections and DbSets that create the tables
         public SchedulerContext() : base("Databas1")
         {
             
@@ -28,9 +29,8 @@ namespace TeleTime.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<TeleTime.Models.Role> Roles { get; set; }
-
-        public System.Data.Entity.DbSet<TeleTime.Models.Time> Times { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Time> Times { get; set; }
     }
    
 }

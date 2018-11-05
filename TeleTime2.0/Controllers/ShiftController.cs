@@ -43,7 +43,7 @@ namespace TeleTime.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var workDays = db.WorkDays.Include(w => w.Day).Include(w => w.Shifts).Where(x => x.ShiftID == id);
+            var workDays = db.WorkDays.Include(w => w.Day).Include(w => w.Shifts).Where(x => x.ShiftID == id).ToList();
             
             if (workDays == null)
             {
@@ -69,12 +69,14 @@ namespace TeleTime.Controllers
             {
                 db.Shifts.Add(shift);
                 db.SaveChanges();
+                // Redirect to the WorkShift controller because it's the natural thing to do after you create a Shift.
                 return RedirectToAction("Create", "WorkShift", new { id = shift.ID });
             }
 
             return View(shift);
         }
 
+        // The Edit methods are excluded at the moment -> it's just a way to change the name and we can't really get it to work with our calendar.
         // GET: Shift/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -90,6 +92,7 @@ namespace TeleTime.Controllers
             return View(shift);
         }
 
+        // The Edit methods are excluded at the moment -> it's just a way to change the name and we can't really get it to work with our calendar.
         // POST: Shift/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -130,7 +133,7 @@ namespace TeleTime.Controllers
         {
             Shift shift = db.Shifts.Find(id);
             
-            //Searches all events with the same name and removes them as well
+            //Searches all events with the same name and removes them as well -> it's because we have a loose connection to between the calendar and the shifts throug WorkDays.
             List<Event> events = db.Events.Where(x => x.text == shift.ShiftName).ToList();
             events.ForEach(s => db.Events.Remove(s));
 
