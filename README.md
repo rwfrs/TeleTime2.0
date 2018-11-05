@@ -52,6 +52,8 @@ Hur man använder applikationen
 Schemaläggaren bygger på pass, för att skapa ett pass så får man först börja med att skapa allt ett pass innehåller.
 
 Skapa Personer - Som du sedan kopplar till passet.
+
 Skapa Roller - Vilka roller innehåller passet.
+
 Skapa Tider - Vilken starttid och sluttid ska passet ha.
-Databas
+
