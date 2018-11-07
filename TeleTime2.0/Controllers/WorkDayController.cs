@@ -136,6 +136,7 @@ namespace TeleTime.Controllers
             return View(workDay);
         }
 
+        //TODO - Bug whit EDIT WORKDAY - when you change a workday the corrensponding event doesn't change- You can't choose the option on the site
         // GET: WorkDay/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -148,7 +149,7 @@ namespace TeleTime.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DayID = new SelectList(db.Days, "ID", "ID", workDay.DayID);
+            ViewBag.DayID = new SelectList(db.Days, "ID", "Date", workDay.DayID);
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workDay.ShiftID);
             return View(workDay);
         }
@@ -191,6 +192,10 @@ namespace TeleTime.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // This deletes the specific event that is connected to the day.
+            WorkDay deleteDay = db.WorkDays.Include(w => w.Day).Include(s => s.Shifts).Where(x => x.ID == id).First();
+            Event deleteEvent = db.Events.Where(x => x.start_date == deleteDay.Day.Date).First();
+            db.Events.Remove(deleteEvent);
             WorkDay workDay = db.WorkDays.Find(id);
             db.WorkDays.Remove(workDay);
             db.SaveChanges();

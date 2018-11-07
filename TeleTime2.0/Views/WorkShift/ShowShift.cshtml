@@ -4,23 +4,23 @@
     ViewBag.Title = "ShowShift";
 }
 
-@{int shiftId = ViewBag.ID;}
+@{int shiftId = ViewBag.ID; string shiftName = ViewBag.Name; }
 
-<h2>Passöversikt</h2>
+<h2>Passöversikt - @shiftName</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Person.Name)
+            Namn
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Role.RoleName)
+            Roll
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Shift.ShiftName)
+            Shift
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time.StartTime)
+            Tid
         </th>
         <th></th>
     </tr>
@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Shift.ShiftName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Time.StartTime)
+                @Html.DisplayFor(modelItem => item.Time.WorkTime)
             </td>
             <td>
                 @Html.ActionLink("Ändra", "Edit", new { id = item.ID }) |
@@ -57,7 +57,10 @@
     </p>
 
 </table>
-
+<div>
+    @Html.ActionLink("Tillbaka till pass", "Index", "Shift")
+</div>
+<br />
 <div>
     @Html.ActionLink("Tillbaka till kalendern", "Index", "BasicScheduler")
 </div>

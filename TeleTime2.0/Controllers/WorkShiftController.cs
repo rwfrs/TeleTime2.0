@@ -31,6 +31,7 @@ namespace TeleTime.Controllers
             {
                 List<WorkShift> workShiftsName = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.Shift.ShiftName == shiftName).ToList();
                 ViewBag.ID = workShiftsName.Select(x => x.ShiftID).First();
+                ViewBag.Name = workShiftsName.Select(x => x.Shift.ShiftName).First();
                 return View(workShiftsName);
             }
             if (id == null)
@@ -43,6 +44,7 @@ namespace TeleTime.Controllers
                 return HttpNotFound();
             }
             ViewBag.ID = id;
+            ViewBag.Name = workShifts.Select(x => x.Shift.ShiftName).First();
             return View(workShifts);
         }
 
@@ -108,7 +110,7 @@ namespace TeleTime.Controllers
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name", workShift.PersonID);
             ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName", workShift.RoleID);
             ViewBag.ShiftID = new SelectList(db.Shifts, "ID", "ShiftName", workShift.ShiftID);
-            ViewBag.TimeID = new SelectList(db.Times, "ID", "StartTime", workShift.TimeID);
+            ViewBag.TimeID = new SelectList(db.Times, "ID", "WorkTime", workShift.TimeID);
             return View(workShift);
         }
 
@@ -123,7 +125,7 @@ namespace TeleTime.Controllers
             {
                 db.Entry(workShift).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowShift", "WorkShift", new { id = workShift.ShiftID });
             }
             ViewBag.PersonID = new SelectList(db.People, "ID", "Name", workShift.PersonID);
             ViewBag.RoleID = new SelectList(db.Roles, "ID", "RoleName", workShift.RoleID);
@@ -139,7 +141,7 @@ namespace TeleTime.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WorkShift workShift = db.WorkShifts.Find(id);
+            WorkShift workShift = db.WorkShifts.Include(w => w.Person).Include(w => w.Role).Include(w => w.Shift).Include(w => w.Time).Where(x => x.ID == id).First();
             if (workShift == null)
             {
                 return HttpNotFound();
@@ -155,7 +157,8 @@ namespace TeleTime.Controllers
             WorkShift workShift = db.WorkShifts.Find(id);
             db.WorkShifts.Remove(workShift);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            // Redirects to ShowShift with the specified ID. That way you only see the shift you are creating.
+            return RedirectToAction("ShowShift", "WorkShift", new { id = workShift.ShiftID });
         }
 
         protected override void Dispose(bool disposing)

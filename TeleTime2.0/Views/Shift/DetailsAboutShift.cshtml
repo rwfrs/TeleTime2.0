@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<TeleTime.Models.WorkDay>
 
+
+<h2>Datum med passet</h2>
+
 <table class="table">
     <tr>
         <th>
@@ -19,16 +22,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Shifts.ShiftName)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
     </tr>
 }
 
 </table>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tillbaka till pass", "Index")
 </div>

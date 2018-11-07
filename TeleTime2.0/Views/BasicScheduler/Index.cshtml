@@ -33,7 +33,6 @@
 
             var dayNow = document.getElementsByClassName('dhx_scale_holder_now');
 
-            console.log(dayNow);
             var days = document.getElementsByClassName('dhx_scale_holder');
             var shiftDays = document.getElementsByClassName('dhx_body');
             
@@ -43,21 +42,48 @@
             if (dayNow.length > 0) {
                 dayNow[0].addEventListener('dblclick', function () {
                     var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
-                    console.log(newText);
 
                     var date = newText[0];
                     var day = date.match(/\d{1,2}/);
-                    console.log(day[0]);
                     if (day[0].length == 1) {
                         day = '0' + day;
                     }
 
-                    console.log(day);
+                    if (date.match(/Jan/)) {
+                        var month = '01';
+                    }
+                    if (date.match(/Feb/)) {
+                        var month = '02';
+                    }
+                    if (date.match(/Mar/)) {
+                        var month = '03';
+                    }
+                    if (date.match(/Apr/)) {
+                        var month = '04';
+                    }
+                    if (date.match(/May/)) {
+                        var month = '05';
+                    }
+                    if (date.match(/Jun/)) {
+                        var month = '06';
+                    }
+                    if (date.match(/Jul/)) {
+                        var month = '07';
+                    }
+                    if (date.match(/Aug/)) {
+                        var month = '08';
+                    }
+                    if (date.match(/Sep/)) {
+                        var month = '09';
+                    }
                     if (date.match(/Oct/)) {
-                        var month = 10;
+                        var month = '10';
                     }
                     if (date.match(/Nov/)) {
-                        var month = 11;
+                        var month = '11';
+                    }
+                    if (date.match(/Dec/)) {
+                        var month = '12';
                     }
                     var year = date.match(/\d{4}/);
 
@@ -69,7 +95,7 @@
                 }, false);
             }
 
-            // TODO - continue here... Month days with shifts
+            // TODO - continue here... Month days with shifts -> Bug that's not fixed
             for (var i = 0; i < monthShiftDays.length; i++) {
                 monthShiftDays[i].addEventListener('click', function () {
                     console.log(this.innerText);
@@ -79,21 +105,48 @@
             for (var i = 0; i < monthDays.length; i++) {
                 monthDays[i].addEventListener('dblclick', function () {
                     var newText = this.outerHTML.match(/\d{1,2}\s[a-zA-Z]{3}\s\d{4}/);
-                    console.log(newText);
 
                     var date = newText[0];
                     var day = date.match(/\d{1,2}/);
-                    console.log(day[0]);
                     if (day[0].length == 1) {
                         day = '0' + day;
                     }
 
-                    console.log(day);
+                    if (date.match(/Jan/)) {
+                        var month = '01';
+                    }
+                    if (date.match(/Feb/)) {
+                        var month = '02';
+                    }
+                    if (date.match(/Mar/)) {
+                        var month = '03';
+                    }
+                    if (date.match(/Apr/)) {
+                        var month = '04';
+                    }
+                    if (date.match(/May/)) {
+                        var month = '05';
+                    }
+                    if (date.match(/Jun/)) {
+                        var month = '06';
+                    }
+                    if (date.match(/Jul/)) {
+                        var month = '07';
+                    }
+                    if (date.match(/Aug/)) {
+                        var month = '08';
+                    }
+                    if (date.match(/Sep/)) {
+                        var month = '09';
+                    }
                     if (date.match(/Oct/)) {
-                        var month = 10;
+                        var month = '10';
                     }
                     if (date.match(/Nov/)) {
-                        var month = 11;
+                        var month = '11';
+                    }
+                    if (date.match(/Dec/)) {
+                        var month = '12';
                     }
                     var year = date.match(/\d{4}/);
 
@@ -121,24 +174,51 @@
 
                     var date = newText[0];
                     var day = date.match(/\d{1,2}/);
-                    console.log(day[0]);
                     if (day[0].length == 1) {
                         day = '0' + day;
                     }
 
-                    console.log(day);
+                    if (date.match(/Jan/)) {
+                        var month = '01';
+                    }
+                    if (date.match(/Feb/)) {
+                        var month = '02';
+                    }
+                    if (date.match(/Mar/)) {
+                        var month = '03';
+                    }
+                    if (date.match(/Apr/)) {
+                        var month = '04';
+                    }
+                    if (date.match(/May/)) {
+                        var month = '05';
+                    }
+                    if (date.match(/Jun/)) {
+                        var month = '06';
+                    }
+                    if (date.match(/Jul/)) {
+                        var month = '07';
+                    }
+                    if (date.match(/Aug/)) {
+                        var month = '08';
+                    }
+                    if (date.match(/Sep/)) {
+                        var month = '09';
+                    }
                     if (date.match(/Oct/)) {
-                        var month = 10;
+                        var month = '10';
                     }
                     if (date.match(/Nov/)) {
-                        var month = 11;
+                        var month = '11';
+                    }
+                    if (date.match(/Dec/)) {
+                        var month = '12';
                     }
                     var year = date.match(/\d{4}/);
 
                     var clickedDate = year + "-" + month + "-" + day;
                     var redirectDate = year + month + day;
 
-                    console.log(redirectDate);
                     doPost(clickedDate, redirectDate);
                     }, false);
             }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TeleTime.Models.WorkDay>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Arbetsdag";
 }
 
 <h2>Arbetsdag</h2>
@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.Shifts.ShiftName)
         </td>
         <td>
-            @Html.ActionLink("Ändra", "Edit", new { id=item.ID }) |
+            @*@Html.ActionLink("Ändra", "Edit", new { id=item.ID }) |*@ <!-- TODO - It's a bug in the controller when you edit a WorkDay-->
             @Html.ActionLink("Ta bort", "Delete", new { id=item.ID })
         </td>
     </tr>
