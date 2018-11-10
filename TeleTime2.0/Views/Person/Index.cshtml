@@ -15,12 +15,22 @@
         @Html.ActionLink("Ladda upp personer med excel", "Upload")
     </p>
 }
+
+@using (Html.BeginForm())
+{
+    <p>
+        Sök på namn: @Html.TextBox("searchString")
+        <input type="submit" value="Sök" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
             Namn:
         </th>
-        <th></th>
+        <th>
+            @Html.ActionLink("Sortera på namn", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
     </tr>
 
     @foreach (var item in Model)

@@ -16,10 +16,33 @@ namespace TeleTime.Controllers
     {
         private SchedulerContext db = new SchedulerContext();
 
+        // You can sort according to the persons name and search for a person
         // GET: Person
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.People.ToList());
+            // Checks if the sortOrder has been set and returns it to the View
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_asce" : "";
+
+            var people = db.People.ToList(); ;
+
+            // Checks if searchString has been passed
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                people = people.Where(p => p.Name.Contains(searchString)).ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_asce":
+                    people = people.OrderBy(p => p.Name).ToList();
+                    break;
+                default:
+                    // people will show up in the order they have been added
+                    break;
+            }
+
+            //return View(db.People.ToList());
+            return View(people);
         }
 
         // GET: Person/Details/5

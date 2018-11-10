@@ -163,7 +163,7 @@
                     var shiftText = this.innerHTML;
                     if (shiftText != '') {
                         console.log(shiftText);
-                        window.location.href = 'http://localhost:65386/WorkShift/ShowShift/?shiftName=' + shiftText;
+                        window.location.href = 'http://127.0.0.1:8080/WorkShift/ShowShift/?shiftName=' + shiftText;
                     }
                 }, false);
             }
@@ -233,7 +233,7 @@
                         Date: clickedDate
                     });
 
-                window.location.href = 'http://localhost:65386/WorkDay/CreateDate/?date=' + redirectDate;
+                window.location.href = 'http://127.0.0.1:8080/WorkDay/CreateDate/?date=' + redirectDate;
 
             }
 
